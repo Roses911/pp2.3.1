@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All Users</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    button {
+      background-color: #008CBA;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      margin: 2px 2px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005F7F;
+    }
+
+    input[type="button"] {
+      background-color: #008CBA;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+      background-color: #005F7F;
+    }
+  </style>
+</head>
+<body>
+<h1>All Users</h1>
+<br>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="user : ${allUsers}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.age}"></td>
+    <td th:text="${user.email}"></td>
+    <td>
+      <a th:href="@{/user/edit/{id}(id=${user.id})}">
+        <button>Edit</button>
+      </a>
+      <form th:method="DELETE" th:action="@{/user/{id}(id=${user.id})}" style="display: inline;">
+        <button>Delete</button>
+      </form>
+    </td>
+  </tr>
+</table>
+<br>
+<input type="button" value="Add" onclick="window.location.href = '/user/newUser'">
+
+</body>
+</html>
